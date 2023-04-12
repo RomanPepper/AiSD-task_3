@@ -1,12 +1,15 @@
-import java.util.Objects;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
-public class QueueHandler<T> {
-    public boolean isPalindrome(Queue<T> inputQueue) {
-        //Создадим параллельный стек, в котором будем хранить значения первой половины для сравнения со второй
+public class CustomQueue<T> {
+    LinkedList<T> elements;
+
+    public CustomQueue(List<T> elements) {
+        this.elements = new LinkedList<>(elements);
+    }
+
+    public boolean isPalindrome() {
         Stack<T> buffer = new Stack<>();
-        return recursionStep(inputQueue, buffer, inputQueue.size(), 1);
+        return recursionStep(elements, buffer, elements.size(), 1);
     }
 
     private boolean recursionStep(Queue<T> inputQueue, Stack<T> buffer, int startQueueSize, int currDepth) {
@@ -34,5 +37,42 @@ public class QueueHandler<T> {
 
             return value;
         }
+    }
+
+    public boolean offer(T element) {
+        try {
+            elements.addLast(element);
+        } catch (NullPointerException exception) {
+            return false;
+        }
+        return true;
+    }
+
+    public T peek() {
+        return (elements.size() == 0) ? null : elements.peek();
+    }
+
+    public T poll() {
+        return (elements.size() == 0) ? null : elements.poll();
+    }
+
+    public T remove() {
+        if (elements.size() == 0) {
+            throw new NoSuchElementException();
+        } else {
+            return elements.remove();
+        }
+    }
+
+    public T element() {
+        if(elements.size() == 0) {
+            throw new NoSuchElementException();
+        } else {
+            return elements.element();
+        }
+    }
+
+    public int size() {
+        return elements.size();
     }
 }

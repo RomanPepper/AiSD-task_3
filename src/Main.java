@@ -1,18 +1,20 @@
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Main {
     //task 3.22
     public static void main(String[] args) {
         ConsoleManager consoleManager = new ConsoleManager();
-        QueueHandler queueHandler = new QueueHandler();
-        Queue queue = consoleManager.readDeque();
+        QueueHandler<String> queueHandler = new QueueHandler<>();
 
+        Queue<String> queue = new LinkedList<>(consoleManager.readSymbolList());
         System.out.println(queueHandler.isPalindrome(queue));
 
+        //OR
+//
+//        CustomQueue<String> customQueue = new CustomQueue<>(consoleManager.readSymbolList());
+//        System.out.println(customQueue.isPalindrome());
 
-//        int queueSize = queue.size();
-//        for(int i = 0; i < queueSize; i++) {
-//            System.out.println(queue.poll());
-//        }
     }
 }
