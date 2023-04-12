@@ -22,8 +22,11 @@ public class QueueHandler<T> {
             return value;
         } else if (startQueueSize % 2 == 1 && currDepth == startQueueSize / 2 + 1) {
             //Ровно середина очереди (Только для очередей с нечетным количеством символов вначале)
-            buffer.push(inputQueue.peek());
-            return recursionStep(inputQueue, buffer, startQueueSize, currDepth + 1);
+
+            T median = inputQueue.poll();
+            boolean value = recursionStep(inputQueue, buffer, startQueueSize, currDepth + 1);
+            inputQueue.add(median);
+            return value;
         } else {
             //После середины
             T val1 = inputQueue.poll();
